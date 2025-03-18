@@ -1,0 +1,20 @@
+{
+    "navigation": {
+        "home": "Főoldal",
+        "dashboard": "Dashboard"
+    },
+    "page": {
+        "home": {
+            "title": "Főoldal",
+            "description": "Főoldal leírás"
+        },
+        "dashboard": {
+            "title": "Dashboard Page",
+            "description": "This is the dashboard page"
+        }
+    },
+    "auth": {
+        "signin": "Bejelentkezés",
+        "signout": "Kijelentkezés"
+    }
+}

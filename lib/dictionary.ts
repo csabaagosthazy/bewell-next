@@ -2,6 +2,7 @@ import 'server-only'
 import type { Locale } from '@/i18n.config'
 
 const dictionaries = {
+  hu: () => import('@/dictionaries/hu.json').then(module => module.default),
   en: () => import('@/dictionaries/en.json').then(module => module.default),
   de: () => import('@/dictionaries/de.json').then(module => module.default)
 }
