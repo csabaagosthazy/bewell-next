@@ -7,10 +7,11 @@ import { authOptions } from '@/app/api/auth/_options'
 import AuthButton from '@/components/auth-button'
 
 export default async function Home({
-  params: { lang }
+  params
 }: {
-  params: { lang: Locale }
+  params: Promise<{ lang: Locale }>
 }) {
+  const { lang } = await params
   const { page, auth } = await getDictionary(lang)
   const session = await getServerSession(authOptions)
   const user = session?.user
