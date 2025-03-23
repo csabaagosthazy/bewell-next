@@ -1,10 +1,11 @@
 import { Locale } from '@/i18n.config'
-import { getDictionary } from '@/lib/dictionary'
+import { getTranslationFile } from '@/lib/dictionary'
 
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/_options'
 
 import AuthButton from '@/components/auth-button'
+import CustomText from '@/components/CustomText/CustomText'
 
 export default async function Home({
   params
@@ -12,13 +13,16 @@ export default async function Home({
   params: Promise<{ lang: Locale }>
 }) {
   const { lang } = await params
-  const { page, auth } = await getDictionary(lang)
+  const { page, auth } = await getTranslationFile(lang)
+
   const session = await getServerSession(authOptions)
+  console.log('session', session)
   const user = session?.user
 
   return (
     <section className='py-24'>
       <div className='container'>
+        <CustomText textType='3xl'>{page.home.title}</CustomText>
         <h1 className='text-3xl font-bold'>{page.home.title}</h1>
         <p className='text-gray-500'>{page.home.description}</p>
 

@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import Providers from './providers'
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { Locale, i18n } from '@/i18n.config'
 import Header from '@/components/header'
 
@@ -24,14 +25,16 @@ export default async function RootLayout({
   children: React.ReactNode
   params: Promise<{ lang: Locale }>
 }) {
-  const {lang} = await params; 
+  const { lang } = await params
   return (
     <html lang={lang}>
       <body className={inter.className}>
-        <Providers>
-          <Header lang={lang} />
-          <main>{children}</main>
-        </Providers>
+        <AppRouterCacheProvider>
+          <Providers>
+            <Header lang={lang} />
+            <main>{children}</main>
+          </Providers>
+        </AppRouterCacheProvider>
       </body>
     </html>
   )

@@ -36,3 +36,6 @@ next-env.d.ts
 
 # credentials
 creds.json
+
+# todo
+x_todo.txt
