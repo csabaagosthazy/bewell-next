@@ -42,7 +42,7 @@ export default function CustomText({ children, textType }: CustomTextProps) {
 
   return (
     <>
-      <TextUpdateDialog textKey={'textKey'} />
+      <TextUpdateDialog nameSpace={'home'} textKey={'title'} />
       <Stack
         direction='row'
         spacing={1}

@@ -1,15 +1,9 @@
 'use client'
 
+import { Translation } from '@/lib/translations'
 import { signIn, signOut, useSession } from 'next-auth/react'
 
-interface AuthButtonProps {
-  auth: {
-    signin: string
-    signout: string
-  }
-}
-
-export default function AuthButton({ auth }: AuthButtonProps) {
+export default function AuthButton({ auth }: { auth: Translation }) {
   const { data: session } = useSession()
 
   return (

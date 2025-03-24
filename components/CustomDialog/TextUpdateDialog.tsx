@@ -1,14 +1,15 @@
 'use client'
+import { getTranslationValuesByKey, NameSpace } from '@/lib/translations'
 import React from 'react'
 
-type Props = {
+export const TextUpdateDialog = ({
+  nameSpace,
+  textKey
+}: {
+  nameSpace: NameSpace
   textKey: string
-}
-export const TextUpdateDialog = ({ textKey }: Props) => {
+}) => {
   // get texts from dictionary by key
-  fetch('/api/hello')
-    .then(res => res.json())
-    .then(data => console.log(data))
 
   // open dialog
   // save text

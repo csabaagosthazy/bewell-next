@@ -1,7 +1,7 @@
 import 'server-only'
 import type { Locale } from '@/i18n.config'
 import { downLoadFile, getTranslation } from '@/services/drive/functions'
-import { Translation } from './translations';
+import { Translations } from './translations';
 
 interface TranslationFile {
   readonly id: string | null;
@@ -24,11 +24,6 @@ export const getAllDictionaries = async () => {
   )
   return dictionariesArray
 }
-// get translation files from google drive
-// if an error occur, return local files
-// select file by locale
-// download file
-// return file content
 
 export const getTranslationFileIds = async () => {
   const fetchResult = await getTranslation();
@@ -67,7 +62,7 @@ export const getTranslationFile = async (locale: Locale) => {
     return getDictionary(locale);
   }
 
-  return file as Translation;
+  return file as Translations;
 }
 
 const getTranslationFiles = async () => {
