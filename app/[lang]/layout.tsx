@@ -2,10 +2,18 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
-import Providers from './providers'
+import Providers from '@/providers/providers'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { Locale, i18n } from '@/i18n.config'
 import Header from '@/components/header'
+import { ModalProvider } from '@/providers/ModalProvider'
+import { getTranslation } from '@/lib/translations'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/_options'
+import {
+  TranslationProvider,
+  Translations
+} from '@/providers/TranslationProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,13 +34,23 @@ export default async function RootLayout({
   params: Promise<{ lang: Locale }>
 }) {
   const { lang } = await params
+  const session = await getServerSession(authOptions)
+  const translation = (await getTranslation(session, lang)) as Record<
+    Locale,
+    Translations
+  >
+  console.log('Layout translation', translation)
   return (
     <html lang={lang}>
       <body className={inter.className}>
         <AppRouterCacheProvider>
           <Providers>
-            <Header lang={lang} />
-            <main>{children}</main>
+            <TranslationProvider translation={translation} locale={lang}>
+              <ModalProvider>
+                <Header lang={lang} />
+                <main>{children}</main>
+              </ModalProvider>
+            </TranslationProvider>
           </Providers>
         </AppRouterCacheProvider>
       </body>

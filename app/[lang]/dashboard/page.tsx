@@ -1,25 +1,28 @@
 import { Locale } from '@/i18n.config'
-import { getDictionary } from '@/lib/dictionary'
 
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/_options'
 
 import AuthButton from '@/components/auth-button'
+import { getTranslation, NameSpace } from '@/lib/translations'
 
 export default async function Dashboard({
-  params: { lang }
+  params
 }: {
-  params: { lang: Locale }
+  params: Promise<{ lang: Locale }>
 }) {
-  const { page, auth } = await getDictionary(lang)
+  const nameSpace: NameSpace = 'dashboard'
+  const { lang } = await params
+  const translation = await getTranslation(lang)
+  const translations = translation[nameSpace]
+  const auth = translation.auth
   const session = await getServerSession(authOptions)
   const user = session?.user
-
   return (
     <section className='py-24'>
       <div className='container'>
-        <h1 className='text-3xl font-bold'>{page.dashboard.title}</h1>
-        <p className='text-gray-500'>{page.dashboard.description}</p>
+        <h1 className='text-3xl font-bold'>{translations.title}</h1>
+        <p className='text-gray-500'>{translations.description}</p>
 
         <div className='mt-6'>
           <pre className='mt-4'>

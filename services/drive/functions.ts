@@ -84,8 +84,3 @@ export const getFilesInFolder = async (folderName: string, mimeType: string = ''
     return getFiles(params);
 };
 
-export const getTranslation = async () => {
-    return getFilesInFolder('Locales', 'application/json');
-};
-
-

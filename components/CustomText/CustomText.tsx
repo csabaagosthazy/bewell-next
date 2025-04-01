@@ -6,19 +6,23 @@ import Stack from '@mui/material/Stack'
 import { useSession } from 'next-auth/react'
 
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
-import CustomDialog from '../CustomDialog/CustomDialog'
-import { TextUpdateDialog } from '../CustomDialog/TextUpdateDialog'
+import { useModal } from '@/providers/ModalProvider'
+import { useTranslation } from '@/providers/TranslationProvider'
+import { NameSpace } from '@/lib/translations'
 
 interface CustomTextProps {
-  children: React.ReactNode
+  tName: NameSpace
+  tKey: string
   textType: string
 }
 
-export default function CustomText({ children, textType }: CustomTextProps) {
+export default function CustomText({ tName, tKey, textType }: CustomTextProps) {
   const { data: session } = useSession()
+  const { t } = useTranslation()
+
+  const { openModal } = useModal()
 
   const [isHover, setIsHover] = useState(false)
-  const [open, setOpen] = useState(false)
 
   const handleMouseEnter = () => {
     setIsHover(true)
@@ -27,22 +31,8 @@ export default function CustomText({ children, textType }: CustomTextProps) {
     setIsHover(false)
   }
 
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
-
-  const handleSave = () => {
-    console.log('save')
-    setOpen(false)
-  }
-
   return (
     <>
-      <TextUpdateDialog nameSpace={'home'} textKey={'title'} />
       <Stack
         direction='row'
         spacing={1}
@@ -50,27 +40,17 @@ export default function CustomText({ children, textType }: CustomTextProps) {
           alignItems: 'center'
         }}
       >
-        <p className={isHover ? 'text-hovered' : 'text'}>{children}</p>
+        <p className={isHover ? 'text-hovered' : 'text'}>{t(tName, tKey)}</p>
         {session && (
           <BorderColorOutlinedIcon
             fontSize='small'
             color='success'
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onClick={handleClickOpen}
+            onClick={() => openModal('text', { tName, tKey })}
           />
         )}
       </Stack>
-      <CustomDialog
-        title='title'
-        content='content'
-        okText='ok'
-        cancelText='Cancel'
-        handleOk={handleSave}
-        handleCancel={handleClose}
-        open={open}
-        handleClose={handleClose}
-      />
     </>
   )
 }

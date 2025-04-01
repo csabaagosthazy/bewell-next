@@ -8,8 +8,8 @@
         "description": "Főoldal leírás"
     },
     "dashboard": {
-        "title": "Dashboard Page",
-        "description": "This is the dashboard page"
+        "title": "Dashboard",
+        "description": "dashboard leírás"
     },
     "auth": {
         "signin": "Bejelentkezés",
