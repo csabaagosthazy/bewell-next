@@ -1,9 +1,10 @@
 'use client'
 import { NameSpace } from '@/lib/translations'
 import React, { useState, useEffect } from 'react'
-import CustomDialog from './CustomDialog'
+import CustomDialog from '../CustomDialog'
 import { TextField, Box } from '@mui/material'
 import { useTranslation } from '@/providers/TranslationProvider'
+import { checkObjectChanges, getObjectDifferences } from '@/utils/common'
 
 export const TextUpdateDialog = ({
   nameSpace,
@@ -16,11 +17,12 @@ export const TextUpdateDialog = ({
   open: boolean
   handleClose: () => void
 }) => {
-  const { getValueForAllLocales } = useTranslation()
-  const [values, setValues] = useState({})
+  const { getValueForAllLocales, getAllTranslations } = useTranslation()
+  const [initValues, _] = useState(getValueForAllLocales(nameSpace, textKey))
+  const [values, setValues] = useState(initValues)
+  const [changed, setChanged] = useState<boolean>(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
     const { name, value } = e.target
     setValues(prevValues => ({
       ...prevValues,
@@ -28,33 +30,39 @@ export const TextUpdateDialog = ({
     }))
   }
 
-  useEffect(() => {
-    const texts = getValueForAllLocales(nameSpace, textKey)
-    setValues(texts)
-
-    return () => {
-      setValues({})
-    }
-  }, [nameSpace, textKey])
-
   const handleSave = (): void => {
     console.log('saving...')
-
-    console.log(values)
-    handleClose()
+    const diff = getObjectDifferences(initValues, values)
+    const allTranslations = getAllTranslations()
+    fetch('/api/update-json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        translations: allTranslations,
+        nameSpace,
+        key: textKey,
+        newValues: diff
+      })
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .then(() => handleClose())
   }
-
-  // get texts from translations by key
-
-  // open dialog
-  // save text
-  // close dialog
 
   return (
     <CustomDialog
       title='Update translation text'
-      content={<TextBoxes handleChange={handleChange} values={values} />}
+      content={
+        <TextBoxes
+          initValues={initValues}
+          handleChange={handleChange}
+          values={values}
+        />
+      }
       okText='Update'
+      okButtonDisabled={!checkObjectChanges(initValues, values)}
       cancelText='Cancel'
       handleOk={handleSave}
       handleCancel={handleClose}
@@ -66,10 +74,12 @@ export const TextUpdateDialog = ({
 
 const TextBoxes = ({
   handleChange,
+  initValues,
   values
 }: {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  values: Object
+  initValues: Record<string, any>
+  values: Record<string, any>
 }) => {
   const hasValues = values && Object.keys(values).length
   return (
@@ -92,6 +102,8 @@ const TextBoxes = ({
             value={values[key as keyof typeof values]}
             onChange={handleChange}
             variant='outlined'
+            helperText={initValues[key as keyof typeof initValues]}
+            focused
           />
         ))}
     </Box>

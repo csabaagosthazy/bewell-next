@@ -47,7 +47,6 @@ export default function LocaleSwitcher({
       <div className='flag-dropdown'>
         <button className='dropdown-button'>
           <span>{getFlag(currentLocale)}</span>
-          <span className='caret'>▼</span>
         </button>
         <div className='dropdown-menu'>
           {i18n.locales.map(locale => (

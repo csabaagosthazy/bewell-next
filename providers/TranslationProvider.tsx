@@ -1,6 +1,6 @@
 'use client'
 
-import { Locale } from '@/i18n.config'
+import { Locale, i18n } from '@/i18n.config'
 import { NameSpace } from '@/lib/translations'
 import { createContext, ReactNode, useContext } from 'react'
 
@@ -43,20 +43,30 @@ export function useTranslation() {
     throw new Error('useTranslation must be used within a translationProvider')
   }
   const { translation, locale } = context
-
+  console.log('Translation context', translation, locale)
   const t = (nameSpace: NameSpace, key: any) => {
     return translation[locale][nameSpace][key] || key
   }
 
+  const getLocaleNameSpace = (nameSpace: NameSpace) => {
+    return translation[locale][nameSpace] || null
+  }
+
   const getValueForAllLocales = (nameSpace: NameSpace, key: any) => {
     const allLocales = {} as Record<Locale, any>
-    Object.keys(translation).forEach((locale): void => {
-      allLocales[locale as Locale] =
-        translation[locale as Locale][nameSpace][key] || key
+    Object.keys(translation).forEach((translationItem): void => {
+      if (i18n.locales.includes(translationItem as Locale)) {
+        allLocales[translationItem as Locale] =
+          translation[translationItem as Locale][nameSpace][key] || key
+      }
     })
 
     return allLocales
   }
 
-  return { t, getValueForAllLocales }
+  const getAllTranslations = () => {
+    return translation
+  }
+
+  return { t, getValueForAllLocales, getAllTranslations, getLocaleNameSpace }
 }

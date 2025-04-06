@@ -10,6 +10,7 @@ export default function CustomDialog({
   title,
   content,
   okText,
+  okButtonDisabled,
   cancelText,
   open,
   handleOk,
@@ -19,6 +20,7 @@ export default function CustomDialog({
   title: string
   content: ReactNode
   okText: string
+  okButtonDisabled: boolean
   cancelText: string
   open: boolean
   handleOk: () => void
@@ -36,7 +38,7 @@ export default function CustomDialog({
         <DialogContent>{content}</DialogContent>
         <DialogActions>
           <Button onClick={handleCancel}>{cancelText}</Button>
-          <Button onClick={handleOk} autoFocus>
+          <Button onClick={handleOk} autoFocus disabled={okButtonDisabled}>
             {okText}
           </Button>
         </DialogActions>

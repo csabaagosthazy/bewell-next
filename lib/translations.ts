@@ -1,6 +1,6 @@
 import { i18n, Locale } from "@/i18n.config"
 import { getDictionary, getAllDictionaries } from "./dictionary"
-import { downLoadFile, getFilesInFolder } from '@/services/drive/functions'
+import { downLoadFile, getFilesInFolder } from '@/services/drive/queries'
 import { Session } from 'next-auth';
 
 interface TranslationFile {
@@ -75,7 +75,19 @@ export const getAllTranslationFiles = async () => {
             return await getAllDictionaries();
         }
         // Initialize translations with locales
-        const translations: Record<Locale, any> = { hu: undefined, en: undefined, de: undefined };
+        interface Translation {
+            fileIds?: Record<Locale, string>;
+            hu: any; // Allow flexible content in each locale
+            en: any; // Allow flexible content in each locale
+            de: any; // Allow flexible content in each locale
+        }
+        let fileIds = {} as Record<Locale, string>;
+        files.forEach(({ locale, id }) => {
+            if (id) {
+                fileIds[locale] = id;
+            }
+        });
+        const translations: Translation = { fileIds, hu: undefined, en: undefined, de: undefined };
 
         // Resolve files in parallel
         const filePromises = files

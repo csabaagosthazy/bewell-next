@@ -31,6 +31,8 @@ export default function CustomText({ tName, tKey, textType }: CustomTextProps) {
     setIsHover(false)
   }
 
+  const type = textType ? textType : 'text'
+
   return (
     <>
       <Stack
@@ -40,7 +42,7 @@ export default function CustomText({ tName, tKey, textType }: CustomTextProps) {
           alignItems: 'center'
         }}
       >
-        <p className={isHover ? 'text-hovered' : 'text'}>{t(tName, tKey)}</p>
+        <p className={isHover ? 'text-hovered' : type}>{t(tName, tKey)}</p>
         {session && (
           <BorderColorOutlinedIcon
             fontSize='small'

@@ -1,0 +1,11 @@
+
+.nav-button {
+margin-top: 1rem !important;
+margin-bottom: 1rem !important;
+color: rgba(255,255,255,0.55) !important;
+display: 'block'!important;
+}
+
+.nav-button:hover {
+    color: rgba(255,255,255,0.85) !important;
+}

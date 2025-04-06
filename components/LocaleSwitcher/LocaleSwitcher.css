@@ -4,8 +4,7 @@
   }
   
   .dropdown-button {
-    background-color: #ffffff;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
@@ -21,8 +20,7 @@
   .dropdown-menu {
     display: none;
     position: absolute;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
+    border: 1px solid #5e503f;
     border-radius: 5px;
     margin-top: 5px;
     z-index: 10;

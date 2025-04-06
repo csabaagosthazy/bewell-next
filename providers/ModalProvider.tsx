@@ -2,7 +2,7 @@
 
 import React, { createContext, ReactNode, useContext, useState } from 'react'
 import CustomDialog from '@/components/CustomDialog/CustomDialog'
-import { TextUpdateDialog } from '@/components/CustomDialog/TextUpdateDialog'
+import { TextUpdateDialog } from '@/components/CustomDialog/TextUpdate/TextUpdateDialog'
 
 interface ModelContextType {
   isOpen: boolean
