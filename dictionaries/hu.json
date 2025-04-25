@@ -1,11 +1,34 @@
 {
     "navigation": {
         "home": "Főoldal",
+        "about": "Magamról",
+        "nls": "NLS diagnosztika",
+        "leech_therapy": "Pióca terápia",
+        "safe_laser": "Safe laser",
+        "frequency_therapy": "Frekvencia terápia",
+        "prices": "Árak",
+        "videos": "Videók",
+        "shop": "Termékek",
         "dashboard": "Dashboard"
+    },
+    "footer": {
+        "title": "Kapcsolat",
+        "description": "",
+        "phone": "+36703713313",
+        "email": "legyjolkozpont@gmail.com",
+        "imprint": "Impresszum",
+        "copyright": "© 2024 legyjolkozpont.hu. Minden jog fenntartva."
     },
     "home": {
         "title": "Főoldal",
-        "description": "Főoldal leírás"
+        "description": "",
+        "welcome_message": "Üdvözlöm a Légyjólközpont oldalán!"
+    },
+    "about": {
+        "title": "Magamról",
+        "description": "",
+        "section_1": "Üdvözlöm! Kozma Magdolna vagyok, évtizedek óta az egészséges életmód híve, mind saját magam, mind pedig a szeretteim körében. Engem már az otthoni környezetben felnőve bevezettek a népi gyógymódok világába, a természet kínálta öngyógyító lehetőségekbe, amiket azóta is gyakorlok. Így ezek az ismeretek mélyen gyökereznek bennem, szorosan összefonódtak mindennapi életemmel.",
+        "section_2": "Azért választottam a honlapomon felsorolt fizikai és közérzet javító terápiákat és azért merültem el bennük, mert szenvedélyesen érdekel az egészség, szeretnék másoknak is segíteni abban, hogy megismertessem, hogyan lehet a hagyományos módszereket és a modern technológia eszközeit kombinálva javítani az egészségi állapotukon."
     },
     "dashboard": {
         "title": "Dashboard",

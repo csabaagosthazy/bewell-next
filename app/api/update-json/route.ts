@@ -3,7 +3,6 @@ import { google } from 'googleapis';
 import { getServerSession } from 'next-auth';
 import { authOptions } from "@/app/api/auth/_options"
 import { i18n } from '@/i18n.config';
-import { getTranslationFileIds } from '@/lib/translations';
 import { isObjectEmpty } from '@/utils/common';
 
 
@@ -26,7 +25,7 @@ export async function POST(req: NextRequest) {
 
 
             Object.entries(newValues).forEach(async ([locale, value]) => {
-                if (!i18n.locales.includes(locale)) {
+                if (!i18n.locales.includes(locale as (typeof i18n.locales)[number])) {
                     return NextResponse.json({ message: `Locale ${locale} is not supported` }, { status: 400 });
                 }
                 const translationFile = translations[locale];
@@ -40,7 +39,6 @@ export async function POST(req: NextRequest) {
                 }
 
                 const updatedContent = { ...translationFile }
-                console.log('updatedContent', updatedContent)
                 updatedContent[nameSpace][key] = value;
 
                 const media = {
@@ -60,8 +58,11 @@ export async function POST(req: NextRequest) {
 
             return NextResponse.json({ message: 'File updated successfully' });
         } catch (error) {
-            console.error('Error updating file:', error.message);
-            return NextResponse.json({ message: 'Internal server error', error: error.message }, { status: 500 });
+            let message;
+            if (error instanceof Error) message = error.message
+            else message = String(error)
+            console.error('Error updating file:', message);
+            return NextResponse.json({ message: 'Internal server error', error: message }, { status: 500 });
         }
 
     } else {

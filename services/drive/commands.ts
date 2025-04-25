@@ -32,7 +32,10 @@ async function updateJsonFileOnDriveWithNextAuth(
         });
         console.log('File updated successfully:', response.data);
     } catch (error) {
-        console.error('Error updating file:', error.message);
+        let message;
+        if (error instanceof Error) message = error.message
+        else message = String(error)
+        console.error('Error updating file:', message);
     }
 }
 
@@ -90,7 +93,10 @@ async function updateJsonKeyValuePair(
 
         console.log('File updated successfully:', updateResponse.data);
     } catch (error) {
-        console.error('Error updating file:', error.message);
+        let message;
+        if (error instanceof Error) message = error.message
+        else message = String(error)
+        console.error('Error updating file:', message);
     }
 }
 

@@ -6,7 +6,7 @@ import Providers from '@/providers/providers'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { Locale, i18n } from '@/i18n.config'
 import Header from '@/components/Header/Header1'
-import ResponsiveAppBar from '@/components/Header/Header'
+import NavBar from '@/components/Header/Header'
 import { ModalProvider } from '@/providers/ModalProvider'
 import { getTranslation } from '@/lib/translations'
 import { getServerSession } from 'next-auth'
@@ -15,7 +15,7 @@ import {
   TranslationProvider,
   Translations
 } from '@/providers/TranslationProvider'
-import Footer from '@/components/footer/Footer'
+import Footer from '@/components/Footer/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -49,7 +49,7 @@ export default async function RootLayout({
           <Providers>
             <TranslationProvider translation={translation} locale={lang}>
               <ModalProvider>
-                <ResponsiveAppBar lang={lang} />
+                <NavBar lang={lang} />
                 <main>{children}</main>
                 <Footer />
               </ModalProvider>

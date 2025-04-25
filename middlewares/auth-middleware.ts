@@ -3,8 +3,7 @@ import { NextFetchEvent, NextRequest, NextResponse } from 'next/server'
 import { getToken } from 'next-auth/jwt'
 import { Locale, i18n } from '@/i18n.config'
 import { CustomMiddleware } from './chain'
-
-const protectedPaths = ['/dashboard']
+import { protectedPaths } from '@/app_config';
 
 function getProtectedRoutes(protectedPaths: string[], locales: Locale[]) {
   let protectedPathsWithLocale = [...protectedPaths]
@@ -12,10 +11,10 @@ function getProtectedRoutes(protectedPaths: string[], locales: Locale[]) {
   protectedPaths.forEach(route => {
     locales.forEach(
       locale =>
-        (protectedPathsWithLocale = [
-          ...protectedPathsWithLocale,
-          `/${locale}${route}`
-        ])
+      (protectedPathsWithLocale = [
+        ...protectedPathsWithLocale,
+        `/${locale}${route}`
+      ])
     )
   })
 

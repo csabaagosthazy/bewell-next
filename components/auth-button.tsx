@@ -1,11 +1,15 @@
 'use client'
 
-import { Translation } from '@/lib/translations'
 import { signIn, signOut, useSession } from 'next-auth/react'
 
-export default function AuthButton({ auth }: { auth: Translation }) {
+import { NameSpace } from '@/lib/translations'
+import { useTranslation } from '@/providers/TranslationProvider'
+
+const NAMESPACE: NameSpace = 'auth'
+
+export default function AuthButton() {
   const { data: session } = useSession()
-  console.log(session)
+  const { t } = useTranslation()
 
   return (
     <>
@@ -14,14 +18,14 @@ export default function AuthButton({ auth }: { auth: Translation }) {
           onClick={() => signOut()}
           className='mt-4 inline-block rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700'
         >
-          {auth.signout}
+          {t(NAMESPACE, 'signin')}
         </button>
       ) : (
         <button
           onClick={() => signIn()}
           className='mt-4 inline-block rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700'
         >
-          {auth.signin}
+          {t(NAMESPACE, 'signout')}
         </button>
       )}
     </>

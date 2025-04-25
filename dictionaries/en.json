@@ -1,11 +1,34 @@
 {
   "navigation": {
-    "home": "Home",
+    "home": "Homepage",
+    "about": "About me",
+    "nls": "NLS diagnostics",
+    "leech_therapy": "Leech therapy",
+    "safe_laser": "Safe laser",
+    "frequency_therapy": "Frequency therapy",
+    "prices": "Prices",
+    "videos": "Videos",
+    "shop": "Shop",
     "dashboard": "Dashboard"
   },
+  "footer": {
+    "title": "Contact",
+    "description": "",
+    "phone": "+36703713313",
+    "email": "legyjolkozpont@gmail.com",
+    "imprint": "Imprint",
+    "copyright": "© 2024 legyjolkozpont.hu. All rights reserved."
+  },
   "home": {
-    "title": "Welcome to NextJs i18n",
-    "description": "Internationalization in NextJs 13 App router"
+    "title": "Homepage",
+    "description": "",
+    "welcome_message": "Welcome to Légyjólközpont's website!"
+  },
+  "about": {
+    "title": "About me",
+    "description": "",
+    "section_1": "Welcome! My name is Magdolna Kozma, and I have been a supporter of a healthy lifestyle for decades, both for myself and for my loved ones. Since childhood, I have been introduced to the world of traditional remedies and the self-healing opportunities offered by nature, which I have been practicing ever since. This knowledge is deeply rooted in me, intertwining closely with my everyday life.",
+    "section_2": "I chose the physical and well-being improving therapies listed on my website and immersed myself in them because I am passionately interested in health. I want to help others understand how to improve their health by combining traditional methods with modern technological tools."
   },
   "dashboard": {
     "title": "Dashboard Page",

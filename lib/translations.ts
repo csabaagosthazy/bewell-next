@@ -9,7 +9,7 @@ interface TranslationFile {
     readonly locale: Locale;
 }
 
-export type NameSpace = 'navigation' | 'home' | 'dashboard' | 'auth';
+export type NameSpace = 'navigation' | 'home' | 'dashboard' | 'auth' | 'footer';
 
 type TranlsationContent<Namespaces extends string> = {
     [Namespace in Namespaces]: Record<string, any>; // Allow flexible content in each namespace

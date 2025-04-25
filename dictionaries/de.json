@@ -1,11 +1,34 @@
 {
   "navigation": {
     "home": "Startseite",
+    "about": "Über mich",
+    "nls": "NLS Diagnostik",
+    "leech_therapy": "Blutegeltherapie",
+    "safe_laser": "Safe laser",
+    "frequency_therapy": "Frequenztherapie",
+    "prices": "Preiseliste",
+    "videos": "Videos",
+    "shop": "Produkte",
     "dashboard": "Dashboard"
   },
+  "footer": {
+    "title": "Kontakt",
+    "description": "",
+    "phone": "+36703713313",
+    "email": "legyjolkozpont@gmail.com",
+    "imprint": "Imprint",
+    "copyright": "© 2024 legyjolkozpont.hu. Alle Rechte vorbehalten."
+  },
   "home": {
-    "title": "Willkommen bei NextJs i18n",
-    "description": "Internationalisierung im NextJs 13 App-Router"
+    "title": "Startseite",
+    "description": "",
+    "welcome_message": "Willkommen auf der Webseite des Wohlbefindens-Zentrums von Légyjólközpont!"
+  },
+  "about": {
+    "title": "Über mich",
+    "description": "",
+    "section_1": "Herzlich willkommen! Ich bin Magdolna Kozma und seit Jahrzehnten ein Anhänger eines gesunden Lebensstils, sowohl für mich als auch für meine Lieben. Bereits in meiner Kindheit wurde ich in die Welt der Volksheilmittel eingeführt, die die Natur bietet, und ich praktiziere sie seitdem. Diese Kenntnisse sind tief in mir verwurzelt und sind fest mit meinem täglichen Leben verbunden.",
+    "section_2": "Ich habe die auf meiner Website aufgeführten körperlichen und Wohlfühltherapien ausgewählt und mich in sie vertieft, weil mich Gesundheit leidenschaftlich interessiert. Ich möchte anderen helfen, zu erfahren, wie man durch die Kombination traditioneller Methoden und moderner Technologien die eigene Gesundheit verbessern kann."
   },
   "dashboard": {
     "title": "Dashboard-Seite",

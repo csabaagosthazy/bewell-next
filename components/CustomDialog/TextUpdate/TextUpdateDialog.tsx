@@ -1,6 +1,6 @@
 'use client'
 import { NameSpace } from '@/lib/translations'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import CustomDialog from '../CustomDialog'
 import { TextField, Box } from '@mui/material'
 import { useTranslation } from '@/providers/TranslationProvider'
@@ -20,7 +20,6 @@ export const TextUpdateDialog = ({
   const { getValueForAllLocales, getAllTranslations } = useTranslation()
   const [initValues, _] = useState(getValueForAllLocales(nameSpace, textKey))
   const [values, setValues] = useState(initValues)
-  const [changed, setChanged] = useState<boolean>(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
