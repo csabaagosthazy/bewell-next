@@ -1,3 +1,36 @@
 .footer{
     background-color: #5e503f !important;
+    flex-shrink: 0;
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+.footer-icons{
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 1rem 0 !important;
+}
+
+.footer-stack{
+    margin-right: 2rem !important;
+    margin-left: 1rem !important;
+}
+
+.footer-copyright{
+    align-self: flex-end !important;
+}
+
+.footer-text{
+    color: rgba(255,255,255,0.55) !important;
+    font-size: 0.8rem !important;
+}
+
+
+.footer-label{
+    color: rgba(255,255,255,0.55) !important;
+}
+
+.footer-icon{
+    color: rgba(255,255,255,0.55) !important;
 }
