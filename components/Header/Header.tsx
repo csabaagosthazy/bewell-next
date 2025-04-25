@@ -1,5 +1,5 @@
 'use client'
-
+import Link from 'next/link'
 import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -10,22 +10,28 @@ import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 
+import AccountCircle from '@mui/icons-material/AccountCircle'
+
 import './Header.css'
+import { hiddenNavItems, adminItems } from '@/app_config'
 import { Locale } from '@/i18n.config'
 import LocaleSwitcher from '@/components/LocaleSwitcher/LocaleSwitcher'
 import { useTranslation } from '@/providers/TranslationProvider'
 import CustomText from '@/components/CustomText/CustomText'
+import { NameSpace } from '@/lib/translations'
 
-const pages = ['Products', 'Pricing', 'Blog']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+import { signOut, useSession } from 'next-auth/react'
 
-function ResponsiveAppBar({ lang }: { lang: Locale }) {
+const NAMESPACE: NameSpace = 'navigation'
+
+function NavBar({ lang }: { lang: Locale }) {
   const { getLocaleNameSpace } = useTranslation()
-  const navigationItems = getLocaleNameSpace('navigation')
+  const navigationItems = getLocaleNameSpace(NAMESPACE)
+  const { data: session } = useSession()
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -50,6 +56,13 @@ function ResponsiveAppBar({ lang }: { lang: Locale }) {
     <AppBar position='static' sx={{ backgroundColor: '#5e503f' }}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+            <IconButton sx={{ p: 0 }}>
+              <Link href={`/${lang}`}>
+                <Avatar alt='Home' src='favicon.ico' />
+              </Link>
+            </IconButton>
+          </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size='large'
@@ -78,72 +91,84 @@ function ResponsiveAppBar({ lang }: { lang: Locale }) {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {navigationItems &&
-                Object.keys(navigationItems).map(pageKey => (
-                  <MenuItem key={pageKey} onClick={handleCloseNavMenu}>
-                    <Typography
-                      sx={{
-                        textAlign: 'center'
-                      }}
-                    >
-                      <CustomText
-                        tName='navigation'
-                        tKey={pageKey}
-                        textType='nav-button'
-                      />
-                    </Typography>
-                  </MenuItem>
-                ))}
+                Object.entries(navigationItems).map(
+                  ([pageKey, value]) =>
+                    pageKey !== 'home' &&
+                    !hiddenNavItems.includes(pageKey) && (
+                      <MenuItem key={pageKey} onClick={handleCloseNavMenu}>
+                        <Link href={`/${lang}/${pageKey}`}>{value}</Link>
+                      </MenuItem>
+                    )
+                )}
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {navigationItems &&
-              Object.keys(navigationItems).map(pageKey => (
-                <Button key={pageKey} onClick={handleCloseNavMenu}>
-                  <CustomText
-                    tName='navigation'
-                    tKey={pageKey}
-                    textType='nav-button'
-                  />
-                </Button>
-              ))}
+              Object.keys(navigationItems).map(
+                pageKey =>
+                  pageKey !== 'home' &&
+                  !hiddenNavItems.includes(pageKey) && (
+                    <MenuItem key={pageKey} onClick={handleCloseNavMenu}>
+                      <Link href={`/${lang}/${pageKey}`}>
+                        {' '}
+                        <CustomText
+                          tName={NAMESPACE}
+                          tKey={pageKey}
+                          textType='nav-button'
+                        />
+                      </Link>
+                    </MenuItem>
+                  )
+              )}
           </Box>
           <Box sx={{ display: 'flex', mr: 1 }}>
             <LocaleSwitcher currentLocale={lang} />
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title='Open settings'>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt='Admin' src='@/app/favicon' />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id='menu-appbar'
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map(setting => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>
-                    {setting}
-                  </Typography>
+          {session && (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title='Open settings'>
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0 }}
+                  color='inherit'
+                >
+                  <AccountCircle fontSize='large' />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id='menu-appbar'
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {adminItems.map(item => (
+                  <MenuItem key={item} onClick={handleCloseUserMenu}>
+                    <Link href={`/${lang}/${item.toLowerCase()}`}>
+                      <Typography sx={{ textAlign: 'center' }}>
+                        {item}
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                ))}
+                <MenuItem onClick={() => signOut()}>
+                  <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
                 </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+              </Menu>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
   )
 }
-export default ResponsiveAppBar
+export default NavBar
