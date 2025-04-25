@@ -1,0 +1,22 @@
+.home-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.welcome-image{
+    width: 300px !important;
+    height: 300px !important;
+    border-radius: 50%; /* Makes the image rounded */
+    object-fit: cover; /* Ensures the image is properly scaled */
+}
+
+.welcome-text{
+    color: #1b263b;
+    font-family: "Great Vibes", cursive;
+    font-size: 55px;
+    font-style: normal;
+    font-weight: 400;
+}

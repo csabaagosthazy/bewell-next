@@ -24,4 +24,19 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the entire viewport height is utilized */
+  margin: 0; /* Remove default body margin */
+}
+
+header {
+  flex-shrink: 0; /* Prevent the header from shrinking */
+}
+
+main {
+  flex: 1; /* Make the main section take up the available space */
+  display: flex;
+  flex-direction: column; /* Optional: Organize child elements vertically */
+  margin-top: 2rem;;
 }
