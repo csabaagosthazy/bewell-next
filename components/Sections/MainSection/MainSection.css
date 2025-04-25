@@ -15,7 +15,7 @@
 
 .welcome-text{
     color: #1b263b;
-    font-family: "Great Vibes", cursive;
+    font-family: var(--font-great-vibes), cursive;
     font-size: 55px;
     font-style: normal;
     font-weight: 400;

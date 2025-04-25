@@ -1,6 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { inter, great_vibes } from '@/app/fonts'
 
 import Providers from '@/providers/providers'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
@@ -16,8 +16,6 @@ import {
   Translations
 } from '@/providers/TranslationProvider'
 import Footer from '@/components/Footer/Footer'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Custom title',
@@ -43,7 +41,7 @@ export default async function RootLayout({
   >
   console.log('Layout translation', translation)
   return (
-    <html lang={lang}>
+    <html lang={lang} className={`${inter.variable} ${great_vibes.variable}`}>
       <body className={inter.className}>
         <AppRouterCacheProvider>
           <Providers>
