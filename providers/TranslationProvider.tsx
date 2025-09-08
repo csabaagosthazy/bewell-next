@@ -43,7 +43,6 @@ export function useTranslation() {
     throw new Error('useTranslation must be used within a translationProvider')
   }
   const { translation, locale } = context
-  console.log('Translation context', translation, locale)
   const t = (nameSpace: NameSpace, key: any) => {
     return translation[locale][nameSpace][key] || key
   }

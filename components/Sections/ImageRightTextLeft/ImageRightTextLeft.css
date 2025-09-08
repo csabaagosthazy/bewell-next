@@ -1,0 +1,15 @@
+.paper{
+    background-color: transparent !important;
+    display: flex !important;
+    flex-direction: row !important;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px !important;
+}
+
+.paper-text-left{
+    padding: 1rem !important;
+    margin: auto !important;
+    max-width: 100% !important;
+    text-align: center !important;
+}

@@ -1,4 +1,6 @@
 import drive from './auth';
+import fs from 'fs';
+import path from 'path';
 
 
 
@@ -47,6 +49,21 @@ export const downLoadFile = async (fileId: string) => {
     }
 };
 
+export const downLoadLongFile = async (fileId: string): Promise<ArrayBuffer | null> => {
+    try {
+        const res = await drive.files.get({ fileId, alt: 'media' }, { responseType: 'arraybuffer' });
+        console.log('downLoadLongFile', res);
+        return res.data as ArrayBuffer;
+
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error('Error downloading file:', error.message);
+        } else {
+            console.error('Error downloading file:', error);
+        }
+        return null;
+    }
+}
 export const getFolders = () => {
     const query = 'mimeType="application/vnd.google-apps.folder"';
     const params = { q: query };

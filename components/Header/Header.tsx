@@ -59,7 +59,7 @@ function NavBar({ lang }: { lang: Locale }) {
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
             <IconButton sx={{ p: 0 }}>
               <Link href={`/${lang}`}>
-                <Avatar alt='Home' src='favicon.ico' />
+                <Avatar alt='Home' src='/favicon.ico' />
               </Link>
             </IconButton>
           </Box>
